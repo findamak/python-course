@@ -17,17 +17,20 @@ flight_object = FlightSearch()
 sheet_data = spreadsheet_object.get_sheety_data()
 print(sheet_data)
 
-# Loop through each row in spreadsheet and check if the IATA code is missing. If so, get the code and populate the
-# spreadsheet.
+# Loop through each row in spreadsheet
 for item in sheet_data:
+    # Check if the IATA code is missing. If so, get the code and populate the
+    # spreadsheet.
     if "iataCode" not in item or item["iataCode"] == "":
         city_iata_code = flight_object.get_iata_code(item["city"])
         spreadsheet_object.put_iata_code(city_iata_code, item["id"])
+    # Check if fields lowestprice and maxstopovers is missing.
     elif "lowestPrice" not in item or item["lowestPrice"] == "" or "maxStopOvers" not in item \
             or item["maxStopOvers"] == "":
         print(f"Destination city: {item['city']}, does not have lowest price or max stop overs set")
     else:
         search_data = flight_object.get_flights(item["iataCode"], item["lowestPrice"], item["maxStopOvers"])
+        # Check if search returns non zero results
         if len(search_data["data"]) != 0:
 
             # Create data format object

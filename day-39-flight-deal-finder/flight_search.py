@@ -7,10 +7,6 @@ from datetime import datetime, timedelta
 DAYS_FROM = 1
 # Max number of days from today to search from.
 DAYS_TO = 180
-# Number of days from today for return flight
-RETURN_FROM = 7
-# Max number of days from today for return flight
-RETURN_TO = 28
 # Currency
 CURR = "AUD"
 # City IATA code we fly from
@@ -46,26 +42,26 @@ class FlightSearch:
 
     def get_flights(self, destination_code, price, max_stop):
 
+        # Format dates to suit API
         date_from = (datetime.now() + timedelta(days=DAYS_FROM)).strftime("%d/%m/%Y")
         date_to = (datetime.now() + timedelta(days=DAYS_TO)).strftime("%d/%m/%Y")
-        #return_from = (datetime.now() + timedelta(days=RETURN_FROM)).strftime("%d/%m/%Y")
-        #return_to = (datetime.now() + timedelta(days=RETURN_TO)).strftime("%d/%m/%Y")
 
         params = {
             "fly_from": CITY,
             "fly_to": destination_code,
             "date_from": date_from,
             "date_to": date_to,
-            #"return_from": return_from,
-            #"return_to": return_to,
             "price_to": price,
             "max_stopovers": max_stop,
             "curr": CURR,
             "flight_type": FLIGHT_TYPE,
             "nights_in_dst_from": NIGHTS_FROM,
             "nights_in_dst_to": NIGHTS_TO,
+            # It returns the cheapest flights to every city covered by the to parameter. works only on one-way requests
             "one_for_city": 1,
+            # M=economy, W=economy premium, C=business, F=first clase
             "selected_cabins": "M",
+            # limit number of results; the default value is 200; max is up to the partner (500 or 1000)
             "limit": "50"
         }
 
