@@ -24,18 +24,22 @@ for item in sheet_data:
     if "iataCode" not in item or item["iataCode"] == "":
         city_iata_code = flight_object.get_iata_code(item["city"])
         spreadsheet_object.put_iata_code(city_iata_code, item["id"])
+
     # Check if fields lowestprice and maxstopovers is missing.
     elif "lowestPrice" not in item or item["lowestPrice"] == "" or "maxStopOvers" not in item \
             or item["maxStopOvers"] == "":
         print(f"Destination city: {item['city']}, does not have lowest price or max stop overs set")
-    else:
-        search_data = flight_object.get_flights(item["iataCode"], item["lowestPrice"], item["maxStopOvers"])
-        # Check if search returns non zero results
-        if len(search_data["data"]) != 0:
 
+    else:
+
+        search_data = flight_object.get_flights(item["iataCode"], item["lowestPrice"], item["maxStopOvers"])
+
+        try:
             # Create data format object
             flight_data_object = FlightData(search_data)
-
+        except IndexError:
+            print(f"No flights found to {item['city']}({item['iataCode']}).")
+        else:
             # Print specific search results
             print(
                 f"Low price alert! Only ${flight_data_object.adults_price} to fly from "
