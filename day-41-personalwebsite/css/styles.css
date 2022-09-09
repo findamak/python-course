@@ -1,0 +1,26 @@
+/*************************** TAG selectors ***************************/
+body {
+    background-color: #9FC9F3;
+}
+
+h1 {
+    color: #25316D;
+}
+
+h3 {
+    color: #25316D;
+}
+
+hr {
+    background-color: white;
+    border-style: none;
+    border-top-style: dotted;
+    border-color: gray;
+    border-width: 5px;
+    width: 10%;
+}
+
+/*************************** CLASS selectors ***************************/
+.bitcoin {
+    background-color: white;
+}
