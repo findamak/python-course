@@ -20,7 +20,24 @@ hr {
     width: 10%;
 }
 
+/* :hover is an example of a pseudo class where state is involved. In this example, the mouse over is the state change. */
+img:hover {
+    background-color: red;
+}
+
+/* Class and ID selectors have priority over TAG selectors. You can only have a single unique ID in each html page. Each element can belong to multiple classes.
+You also cannot have more than one ID for each element. */
+
 /*************************** CLASS selectors ***************************/
 .bitcoin {
     background-color: white;
+}
+
+.circular {
+    border-radius: 100%;
+}
+
+/*************************** CLASS selectors ***************************/
+#headingh1 {
+    color: white;
 }
