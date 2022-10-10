@@ -14,11 +14,12 @@ response = requests.get(URL)
 content = response.text
 soup = BeautifulSoup(content, "html.parser")
 
-# Create a list that contains the correct tags
+# Create a list that contains the correct tag elements we are after
 tags = soup.find_all("h3", class_="a-no-trucate")
 # Get the text and strip all the \t\n etc
 song_names = [tag.getText().strip() for tag in tags]
 
+# https://spotipy.readthedocs.io/en/2.13.0/#
 # instantiate the class and create an oauth token into a text file. Note we had to create an app at
 # https://developer.spotify.com/dashboard/applications and edit the settings and add in a redirect URI which was
 # http://example.com and then enter the full redirect URL into the prompt at the console.
