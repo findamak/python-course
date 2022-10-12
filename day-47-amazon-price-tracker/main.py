@@ -19,6 +19,7 @@ print(prod_title)
 price_tag = soup.find("span", class_="a-price-whole")
 price = float(price_tag.getText().split(".")[0])
 print(price)
+
 link = soup.find("link", rel="canonical").get("href")
 print(link)
 
